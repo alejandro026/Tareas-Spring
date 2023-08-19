@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -27,5 +28,14 @@ public class Task implements Serializable {
 
     @Column(name = "STATUS",nullable = false)
     private String status;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DATE_REGISTRATION", nullable = false)
+    private Date dateRegistration;
+
+    @PrePersist
+    private void onCreate() {
+        dateRegistration = new Date();
+    }
 
 }

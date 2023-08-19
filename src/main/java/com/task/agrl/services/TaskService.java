@@ -31,6 +31,9 @@ public class TaskService implements ITaskService{
         List<Task> listTask;
         try {
             listTask= taskRepository.findAll();
+            if (listTask.size()==0){
+                throw new BusinessException(HttpStatus.NOT_FOUND, "No existen tareas en la base de datos.");
+            }
             response.setList(listTask);
             response.setCount(listTask.size());
             response.setMessage("Tareas encontradas con éxito");
@@ -127,12 +130,17 @@ public class TaskService implements ITaskService{
      */
     @Override
     public Response<Task> deleteTask(Integer idTask) {
+        // Se crea una instancia de la clase Response que se retornará.
+        Response<Task> response = new Response<>();
+
         try {
             taskRepository.deleteById(idTask);
+            response.setMessage("Tarea eliminada con exitó");
+            response.setStatus("OK");
         }catch (DataAccessException e){
             log.error(e.getMessage());
             throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al eliminar la tarea.");
         }
-        return null;
+        return response;
     }
 }
