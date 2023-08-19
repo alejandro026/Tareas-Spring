@@ -8,7 +8,7 @@ public interface ITaskService {
     public Response<Task> findAllTask();
     public Response<Task> findByIdTask(Integer idTask);
     public Response<Task> createTask(Task task);
-    public Response<Task> updatePost(Task task);
-    public Response<Task> deletePost(Integer idTask);
+    public Response<Task> updateTask(Task task);
+    public Response<Task> deleteTask(Integer idTask);
 
 }

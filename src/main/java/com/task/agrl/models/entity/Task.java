@@ -23,7 +23,7 @@ public class Task implements Serializable {
     private Integer idTask;
 
     @Column(name = "NAME",nullable = false)
-    private Integer name;
+    private String name;
 
     @Column(name = "STATUS",nullable = false)
     private String status;
